@@ -21,17 +21,6 @@ Data yang digunakan diambil dari [Kaggle: Cyber Attacks on Real-Time Internet of
 - `matplotlib`: Untuk visualisasi grafik dan tren.
 - `scipy`: Untuk uji hipotesis dan ANOVA.
 
-## Cara Menjalankan Kode
-
-1. Pastikan kamu sudah menginstal modul yang diperlukan, dengan perintah:
-    ```bash
-    pip install pandas numpy matplotlib scipy
-    ```
-
-2. Jalankan skrip Python di Jupyter Notebook atau editor Python lainnya untuk melihat hasil analisis.
-
-3. Data akan diambil langsung dari Google Sheets melalui URL CSV untuk analisis lebih lanjut.
-
 ## Sumber Data
 
 Data yang digunakan diambil dari Kaggle, tersedia di [tautan ini](https://www.kaggle.com/datasets/joebeachcapital/real-time-internet-of-things-rt-iot2022/data). 
