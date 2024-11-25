@@ -63,7 +63,7 @@ print(f"\n")
 
 plt.figure(figsize=(12, 6))
 plt.plot(df_attacks_per_day_cleaned.index, df_attacks_per_day_cleaned['jumlah'], label='Serangan Harian')
-plt.axhline(y=df_attacks_per_day_cleaned['jumlah'].median(), color='r', linestyle='--', label=f'Median: {df_attacks_per_day_cleaned["jumlah"].median()}')  # Menambahkan garis median
+plt.axhline(y=df_attacks_per_day_cleaned['jumlah'].median(), color='r', linestyle='--', label=f'Median: {df_attacks_per_day_cleaned["jumlah"].median()}') 
 plt.title("Serangan Harian Seiring Waktu dengan Garis Median")
 plt.xlabel("Hari Sejak Awal Pengamatan")
 plt.ylabel("Jumlah Serangan")
