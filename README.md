@@ -4,7 +4,7 @@ Proyek ini berfokus pada analisis data serangan siber harian untuk mengidentifik
 
 ## Deskripsi Data
 
-Data yang digunakan diambil dari [Kaggle: Cyber Attacks on Real-Time Internet of Things](https://www.kaggle.com/datasets/joebeachcapital/real-time-internet-of-things-rt-iot2022/data). Data ini berisi informasi tentang serangan siber, yang kemudian difilter dan dihitung untuk mendapatkan jumlah serangan per hari.
+Data yang digunakan diambil dari [Kaggle: Cyber Security Attacks]([https://www.kaggle.com/datasets/joebeachcapital/real-time-internet-of-things-rt-iot2022/data](https://www.kaggle.com/datasets/teamincribo/cyber-security-attacks/data?select=cybersecurity_attacks.csv)). Data ini berisi informasi tentang serangan siber, yang kemudian difilter dan dihitung untuk mendapatkan jumlah serangan per hari.
 
 ## Metode yang Digunakan
 
@@ -23,7 +23,7 @@ Data yang digunakan diambil dari [Kaggle: Cyber Attacks on Real-Time Internet of
 
 ## Sumber Data
 
-Data yang digunakan diambil dari Kaggle, tersedia di [tautan ini](https://www.kaggle.com/datasets/joebeachcapital/real-time-internet-of-things-rt-iot2022/data). 
+Data yang digunakan diambil dari Kaggle, tersedia di [tautan ini]([https://www.kaggle.com/datasets/joebeachcapital/real-time-internet-of-things-rt-iot2022/data](https://www.kaggle.com/datasets/teamincribo/cyber-security-attacks/data?select=cybersecurity_attacks.csv)). 
 
 Harap dicatat bahwa data ini telah diproses lebih lanjut untuk mendapatkan jumlah serangan per hari melalui query di google sheets.
 
