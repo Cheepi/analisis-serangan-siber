@@ -63,70 +63,56 @@ print(f"\n")
 
 plt.figure(figsize=(12, 6))
 plt.plot(df_attacks_per_day_cleaned.index, df_attacks_per_day_cleaned['jumlah'], label='Serangan Harian')
-plt.axhline(y=df_attacks_per_day_cleaned['jumlah'].median(), color='r', linestyle='--', label=f'Median: {df_attacks_per_day_cleaned["jumlah"].median()}') 
+plt.axhline(y=df_attacks_per_day_cleaned['jumlah'].median(), color='r', linestyle='--', label=f'Median: {df_attacks_per_day_cleaned["jumlah"].median()}')  # Menambahkan garis median
 plt.title("Serangan Harian Seiring Waktu dengan Garis Median")
 plt.xlabel("Hari Sejak Awal Pengamatan")
 plt.ylabel("Jumlah Serangan")
 plt.legend()
 plt.show()
 
-# regresi: memeriksa tren seiring waktu
-df_attacks_per_day_cleaned['HariNumerik'] = (df_attacks_per_day_cleaned['Tanggal'] -
+# Menghitung Hari Numerik
+df_attacks_per_day_cleaned['HariNumerik'] = (df_attacks_per_day_cleaned['Tanggal'] - 
                                              df_attacks_per_day_cleaned['Tanggal'].min()).dt.days
 x = df_attacks_per_day_cleaned['HariNumerik']
 y = df_attacks_per_day_cleaned['jumlah']
-slope, intercept = np.polyfit(x, y, 1)
-korelasi, p_value_korelasi = pearsonr(x, y)
-print("\nRegresi dan Korelasi untuk Tren Seiring Waktu:")
-print(f"Slope (Kemiringan): {slope}, Intercept: {intercept}")
-print(f"Korelasi: {korelasi}, P-value: {p_value_korelasi}")
-print(f"\n")
 
-for derajat in range(2, 6):
-    # regresi polinomial untuk setiap derajat (2, 3, 4, 5)
-    koefisien = np.polyfit(x, y, derajat)
-    y_pred = np.polyval(koefisien, x)
-
-    print(f"Koefisien untuk Polinomial Derajat {derajat}: {koefisien}")
-
-    korelasi = np.corrcoef(y, y_pred)[0, 1]
-    print(f"Korelasi untuk Polinomial Derajat {derajat}: {korelasi}\n")
-
+# Regresi Linear dan Polinomial (Derajat 1 sampai 5)
 plt.figure(figsize=(12, 6))
 plt.plot(df_attacks_per_day_cleaned['Tanggal'], df_attacks_per_day_cleaned['jumlah'], label='Observasi', color='black')
-plt.plot(df_attacks_per_day_cleaned['Tanggal'], slope * x + intercept,
-         label='Garis Tren Linear', color='red', linestyle='--')
 
-for derajat in range(2, 6):
-    prediksi_polinomial = np.polyval(np.polyfit(x, y, derajat), x)
-    plt.plot(df_attacks_per_day_cleaned['Tanggal'], prediksi_polinomial,
-             label=f'Garis Tren Polinomial Derajat {derajat}')
+for derajat in range(1, 6):
+    # Regresi Polinomial dan Linear untuk derajat 1 sampai 5
+    koefisien = np.polyfit(x, y, derajat)
+    y_pred = np.polyval(koefisien, x)
+    
+    # Menghitung Korelasi Pearson
+    korelasi, p_value_korelasi = pearsonr(y, y_pred)
+    
+    print(f"Koefisien untuk Derajat {derajat}: {koefisien}")
+    print(f"Korelasi Pearson untuk Derajat {derajat}: {korelasi}, P-value: {p_value_korelasi}\n")
+    
+    # Menambahkan plot untuk semua derajat
+    plt.plot(df_attacks_per_day_cleaned['Tanggal'], y_pred, label=f'Garis Tren Derajat {derajat}')
+
 plt.title("Regresi Linear dan Polinomial untuk Serangan Siber Harian Seiring Waktu")
 plt.xlabel("Tanggal")
 plt.ylabel("Jumlah Serangan")
 plt.legend()
 plt.show()
 
-
-# prediksi 30 hari ke depan dengan model polinomial
+# Prediksi 30 Hari Ke Depan
 hari_masa_depan = np.arange(x.max() + 1, x.max() + 31)
-
 plt.figure(figsize=(12, 6))
 
-print(f"\n")
-for derajat in range(2, 6):
+# Prediksi untuk Derajat 1 hingga 5
+for derajat in range(1, 6):
     prediksi_masa_depan = np.polyval(np.polyfit(x, y, derajat), hari_masa_depan)
-    plt.plot(hari_masa_depan, prediksi_masa_depan, label=f'Prediksi Polinomial Derajat {derajat}')
-    print(f"Prediksi Polinomial Derajat {derajat} 30 Hari Ke Depan: ")
+    plt.plot(hari_masa_depan, prediksi_masa_depan, label=f'Prediksi Derajat {derajat}')
+    print(f"Prediksi Derajat {derajat} 30 Hari Ke Depan: ")
     print(f"{prediksi_masa_depan} \n")
 
-prediksi_linear = slope * hari_masa_depan + intercept
-print(f"Prediksi Linear 30 Hari Ke Depan: \n{prediksi_linear} \n")
-
-plt.plot(hari_masa_depan, prediksi_linear, label='Prediksi Linear', color='red', linestyle='--')
-plt.title("Prediksi 30 Hari Serangan Siber (Linear dan Polinomial Derajat 2-5)")
+plt.title("Prediksi 30 Hari Serangan Siber (Linear dan Polinomial Derajat 1-5)")
 plt.xlabel("Hari Sejak Awal Pengamatan (Mulai dari Hari ke-1381 hingga Hari ke-1410)")
 plt.ylabel("Jumlah Serangan yang Diprediksi")
 plt.legend()
 plt.show()
-
